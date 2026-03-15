@@ -1,8 +1,13 @@
 package com.cvega.sdet.task_management_service.task;
 
-import java.time.LocalDate;
+import jakarta.persistence.*;
 
+import java.time.LocalDate;
+@Entity
+@Table
 public class Task {
+    @Id
+    @GeneratedValue(strategy= GenerationType.IDENTITY)
     private long id;
     private String taskDescription;
     private LocalDate dateOfCreation;
