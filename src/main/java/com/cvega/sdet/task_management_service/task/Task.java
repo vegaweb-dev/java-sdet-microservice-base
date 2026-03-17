@@ -3,30 +3,31 @@ package com.cvega.sdet.task_management_service.task;
 import jakarta.persistence.*;
 
 import java.time.LocalDate;
+import java.time.Period;
+
 @Entity
 @Table
 public class Task {
     @Id
-    @GeneratedValue(strategy= GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
     private String taskDescription;
     private LocalDate dateOfCreation;
+    @Transient
     private int taskAge;
 
     public Task() {
     }
 
-    public Task(long id, String taskDescription, LocalDate dateOfCreation, int taskAge) {
+    public Task(long id, String taskDescription, LocalDate dateOfCreation) {
         this.id = id;
         this.taskDescription = taskDescription;
         this.dateOfCreation = dateOfCreation;
-        this.taskAge = taskAge;
     }
 
-    public Task(String taskDescription, LocalDate dateOfCreation, int taskAge) {
+    public Task(String taskDescription, LocalDate dateOfCreation) {
         this.taskDescription = taskDescription;
         this.dateOfCreation = dateOfCreation;
-        this.taskAge = taskAge;
     }
 
     public long getId() {
@@ -54,7 +55,7 @@ public class Task {
     }
 
     public int getTaskAge() {
-        return taskAge;
+        return Period.between(this.dateOfCreation,LocalDate.now()).getDays();
     }
 
     public void setTaskAge(int taskAge) {
