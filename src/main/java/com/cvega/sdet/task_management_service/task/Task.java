@@ -11,6 +11,7 @@ public class Task {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
+    @Column(unique = true)
     private String taskDescription;
     private LocalDate dateOfCreation;
     @Transient
